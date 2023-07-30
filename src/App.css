@@ -1,0 +1,35 @@
+.Innercard {
+  height: 50px;
+  width: 280px;
+  text-align: left 30%;
+  padding-top: 12px;
+  padding-left: 10px;
+  box-shadow: rgba(0, 0, 0, 2);
+}
+.Subcard {
+  width: 280px;
+  height: 470px;
+  margin: 5px;
+  border-radius: 10px;
+  /* box-shadow: 2px 3px 8px rgba(0,0,0,0.5) ; */
+}
+
+.resigns {
+  height: 400px;
+  width: 350px;
+  margin: 5px;
+  line-height: 30px;
+  text-align: justify;
+}
+
+/* @media screen and (max-width: 468px) {
+  .about{ 
+    font-size: 12px;
+    background: #000;
+    margin: auto;
+    padding: auto;
+  
+  }
+
+  
+} */
