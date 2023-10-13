@@ -1,22 +1,24 @@
 import React from 'react'
-import { Box, VStack, Heading, Text, Divider, Stack, Flex, Button, HStack, Image } from '@chakra-ui/react'
+import { Box, VStack,Center,  Text,  Flex,  Image, SimpleGrid } from '@chakra-ui/react'
 import './../App.css';
+
 
 
 const About = () => {
   return (
     <Box>
-
-      <Box margin="20px" >
-        <HStack>
-          <Box margin="20px">
-            <VStack>
-              <Box >
-                <Text  as="b" fontSize="35px" color="#215878">About Sri Scientifics</Text>
+      
+      <Box margin="30px" >
+        {/* <HStack> */}
+        <Center>
+        <Box className="aboutHead">
+                <Text >About Sri Scientifics</Text>
               </Box>
-
-              <Box align="justify" color="#756F6F" >
-                <Text  pt="15px" lineHeight="25px">
+        </Center>
+        <Flex direction={{ base: 'column', xl: 'row' }} className='about'>
+          <Box className='aboutContent' align="justify" >
+           
+                <Text   lineHeight="25px">
                   SRI Scientifics is an emerging company with
                   excellent market rating and company profile is based
                   on manufacturing of impurities, marketing of
@@ -25,7 +27,7 @@ const About = () => {
                   Intermediates
                 </Text>
 
-                <Text pt="15px" lineHeight="25px"  >
+                <Text pt="15px" lineHeight="25px"color="#333333">
                   We have an exclusive Authorization for Distribution of
                   USP listed ADHOC Brand HPLC Columns and
                   Microbiology media over the market of AP, Telangana
@@ -43,30 +45,26 @@ const About = () => {
                   experience in supplying the consumables for the
                   chromatographic applications.
                 </Text>
-              </Box>
-            </VStack>
+              
           </Box>
-          <Image src='./aboutbanner.png' alt='about us' />
-        </HStack>
+          <Image src='./aboutus-banner.png' alt='about us' className='aboutImage'/>
+        {/* </HStack> */}
+        </Flex>
       </Box>
 
-      <Box margin="50px" color="756F6F" align="justify" height="300px">
-        <HStack spacing="50px">          
-            <Box height="200px">
-              <VStack paddingBottom="20px" >
-                <Text color="#215878" fontSize="20px" as="b"> IMPURITIES AND STANDARDS: </Text>
-                <Divider border="1px" color="#756F6F" width="80%" />
-                <Text lineHeight="30px">All primary reference standards, We have 
-              characterized in-house impurities with testing data
-              andCOA.</Text>
-              </VStack>
-            </Box>
+      {/* <Box margin="50px" color="756F6F" align="justify" height="300px"> */}
+        {/* <HStack spacing="50px">           */}
+        <SimpleGrid columns={{ base: 1, xl:3 }} spacing={{lg:4,xl:8}} className='aboutChemicals'>
+            
 
-            <Box height="200px">
-              <VStack paddingBottom="20px" >
-                <Text color="#215878" fontSize="20px" as="b"> CHEMICALS AND SOLVENTS: </Text>
-                <Divider border="1px" color="#756F6F" width="80%"/>
-                <Text lineHeight="30px">We are suppliers for <b> Thermo Fischer </b> brand 
+            <Box m={{base:"0px",lg:"10px"}} color="##333333">
+             <VStack>
+              <Box borderBottom="2px solid #0157AC" pb="4px" >
+                <Text color="#0157AC" fontSize="20px" as="b"> Chemical and Solvents: </Text>
+                </Box>
+                
+                <Box align="justify">
+                <Text lineHeight="30px">We are suppliers for  Thermo Fischer brand 
                 chemicals and solvents which includes HPLC/GC 
                 solvents in variant grades.</Text>
                 <Text lineHeight="30px">Apart from the above, we will be supplying all
@@ -74,19 +72,38 @@ const About = () => {
                 and Fluka brands.</Text>
                 <Text lineHeight="30px">We are specialized in supplying Honeywell, Advent, 
                 Bio-solve grade spectroscopic solvents.</Text>
-              </VStack>
+                </Box>
+                </VStack>
             </Box>
 
-            <Box height="200px">
-              <VStack paddingBottom="20px" >
-                <Text color="#215878" fontSize="20px" as="b"> Microbiology media: </Text>
-                <Divider border="1px" color="#756F6F" width="80%" />
+            <Box m={{base:"0px",lg:"10px"}} color="##333333">
+             <VStack>
+              <Box borderBottom="2px solid #0157AC" pb="4px">
+                <Text color="#0157AC" fontSize="20px" as="b"> Microbiology Media: </Text>
+                </Box>
+                <Box align="justify">
                 <Text lineHeight="30px">We are authorized distributers for all types of Agar 
                 media and different types of medias for microbiology labs.</Text>
+                </Box>
+                </VStack>
+            </Box>
+
+            <Box m={{base:"0px",lg:"10px"}}>
+              <VStack  >
+                <Box borderBottom="2px solid #0157AC" pb="4px">
+                <Text color="#0157AC" fontSize="20px" as="b"> Impurities and Standards: </Text>
+                </Box>
+                
+                <Box align="justify">
+                <Text lineHeight="30px" color="##333333">All primary reference standards, We have 
+              characterized in-house impurities with testing data
+              andCOA.</Text>
+              </Box>
               </VStack>
             </Box>
-          </HStack>
-      </Box>
+            </SimpleGrid>
+          {/* </HStack> */}
+      {/* </Box> */}
     </Box>
   )
 }

@@ -1,208 +1,227 @@
 import React from 'react'
-import { Box, Button, Card, Text, Image, Center, HStack, Divider, } from '@chakra-ui/react'
-const Mainpageone = () => {
+
+import { useState } from "react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  useDisclosure,
+  VStack,
+  Collapse,
+  Button,
+  Text,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon, SearchIcon, ChevronDownIcon} from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
+
+function Header() {
+  const { isOpen, onToggle } = useDisclosure();
+  const [menuData, setMenuData] = useState([
+    { label: "Home", url: "/" },
+    { label: "About Us", url: "/about" },
+    {
+      label: "Products Category",
+      url: "/Products",
+      subItems: [
+        // product items...
+        { label: "Impurities Synthesis", url: "/Products" },
+        { label: "Laboratory Chemicals & solvents", url: "/Labaratoriesandchemicalsolvents" },
+        { label: "Microbiology Agar Media", url: "/MicrobiologyAgarmedia" },
+        { label: "Resins & Metal scavengers", url: "/Resignsandmetalscavangers" },
+        { label: "HPLC Columns", url: "/HPCLColumns" },
+        { label: "Supply of ApIs & Intermediates", url: "/Apiintermediates" },
+      ],
+    },
+    { label: "Technical Support", url: "/Technicalsupport" },
+    
+    { label: "Contact Us", url: "/contact" },
+  ]);
+
   return (
     <Box>
+      <Flex
+        as="nav"
+        align="center"
+        justify="space-between"
+        padding={{ base: 2, lg: 4 }}
+        bg="white"
+        color="#215878"
+        h="70px"
+        // position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        fontSize="15px"
+        fontWeight="600"
+        // zIndex="1"
+      >
+        {/* Logo ------- */}
+        <Flex align="center">
+          <img src="Final logo 1.png" alt="Logo" />
+        </Flex>
 
-      <Box paddingLeft="48px">
-        <Box bgImage="/Bannerb.png" height="700px" width="1300px">
-          <Box paddingTop="600px" paddingLeft="5px"> <Button variant="outline" color="#565454" width="250px" height="50px" borderColor="#FCA119" colorScheme="white">Get Started</Button> </Box>
-        </Box>
-      </Box>
+        {/* Hamburger Icon for mobile --------- */}
+        <IconButton
+          display={{ base: "flex", lg: "none" }}
+          icon={isOpen ? <CloseIcon color={"#215878"}/> : <HamburgerIcon color={"#215878"} />}
+          onClick={onToggle}
+          variant="outline"
+          color="white"
+        />
 
-      <Center>
-        <Box paddingTop="50px" fontSize="25px" color="#565454">
+         {/* Search Bar */}
+         <InputGroup w="300px" display={{ base: "none", lg: "flex" }}>
+            <Input type="text" placeholder="Search..." />
+            <InputRightElement>
+              <IconButton
+                aria-label="Search"
+                icon={<SearchIcon />}
+                variant="ghost"
+                colorScheme="#215878"
+              />
+            </InputRightElement>
+          </InputGroup>
+        {/* Desktop Navigation Links */}
+        <Flex display={{ base: "none", lg: "flex" }} alignItems="center">
 
-          <HStack paddingTop="30px" spacing="200px">
+          {menuData.map((item) => (
+            <React.Fragment key={item.label}>
+              {item.subItems ? (
+                <Menu>
+                  <MenuButton
+                  mr={8}
+                    // as={Button}
+                    // rightIcon={<ChevronDownIcon/>}
+                    variant="link"
+                    fontWeight={"600"}
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                  >
+                    {item.label}<ChevronDownIcon/>
+                  </MenuButton>
+                  <MenuList >
+                    {item.subItems.map((subItem) => (
+                      <Link key={subItem.label} to={subItem.url}>
+                        <MenuItem>{subItem.label}</MenuItem>
+                      </Link>
+                    ))}
+                  </MenuList>
+                </Menu>
+              ) : (
+                <Link to={item.url}>
+                  <Text _hover={{ color: "#215878", borderRadius: "10px" }} mr={8} >
+                    {item.label}
+                  </Text>
+                </Link>
+              )}
+            </React.Fragment>
+          ))}
+          
+        </Flex>
+      </Flex>
 
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> Impurities Synthsis <br /> </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority <br />have by injected humour.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-
-
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> Laboratory Chemical <br /> & Solvents </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-          </HStack>
-
-          <HStack paddingTop="30px" spacing="200px">
-
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> Microbiology <br /> Agar Media </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> Resigns &  Metal<br /> Scavengers </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-          </HStack>
-
-          <HStack paddingTop="30px" spacing="200px">
-
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> HPLC Columns </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority <br />have by injected humour.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-
-            <HStack spacing="20px">
-              <Image src='/Cardb.png'></Image>
-              <Box>
-                <Text paddingBottom="20px"> Supply of APIs <br /> Intermediates </Text>
-                <Text fontSize="17px" paddingBottom="10px">There are many variations <br /> of passages of Lorem Ipsum <br /> available, but the majority.</Text>
-                <Divider border="1px" color="gray.400" />
-              </Box>
-            </HStack>
-          </HStack>
-        </Box>
-      </Center>
-
-      <Center>
-        <Box paddingTop="50px" paddingRight="20px" color="#565454">
-          <HStack spacing="70px">
-            <Image src='/Cardc.png' height="400px"></Image>
-            <Box>
-              <Text paddingBottom="20px" fontSize="35px"> Supply of APIs <br /> Intermediates </Text>
-              <Text fontSize="17px" paddingBottom="10px">There are many variations of passages of Lorem Ipsum <br /> There are ma variations of passages of Lorem Ipsum <br />
-                There are many variations of passages of Lorem dsum <br /> There are many variations of pa of Lorem Ipsum <br />  There are many variations of passages of Lorem dsum
-                <br /> There are many variations of pa of Lorem Ipsum</Text>
-            </Box>
-          </HStack>
-        </Box>
-      </Center>
-
-
-      <Center>
-        <Box paddingTop="50px" fontSize="25px" color="#565454" paddingBottom="30px">
-          <Text paddingLeft="300px" as="b" paddingBottom="50px">Pharmaceutical Reference Standards</Text>
-
-          <HStack paddingTop="30px" spacing="30px">
-
-            <Box>
-              <Card height="480px" width="320px" borderRadius="15px" boxShadow="lg">
-                <Text fontSize="30px" paddingLeft="30px" paddingBottom="10px"> Abacavir Sulphate</Text>
-                <Divider color="gray.500" />
-                <Box paddingTop="35px"> <Image src='/Cardd.png' alt='Chakra UI' /> </Box>
-
-                <Box paddingLeft="20px" paddingTop="10px" fontSize="20px">
-                  <HStack>
-                    <Box> <Text >CAT No </Text> </Box>
-                    <Text paddingLeft="26px"> : SZ-A049001</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>CAS No </Text> </Box>
-                    <Text paddingLeft="26px"> : 188062-50-2</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.F. </Text> </Box>
-                    <Text paddingLeft="40px"> : C14H18N6O</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.Wt </Text> </Box>
-                    <Text paddingLeft="30px"> : 286.3 : 1/2(98.1)</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Inv.Status </Text> </Box>
-                    <Text paddingLeft="10px"> : Custom Synthesis</Text>
-                  </HStack>
-                  <Box paddingTop="20px" paddingLeft="70px"> <Button colorScheme='blue'> Explore More </Button> </Box>
-                </Box>
-              </Card>
-            </Box>
-
-            <Box>
-              <Card height="480px" width="320px" borderRadius="15px" boxShadow="lg">
-                <Text fontSize="30px" paddingLeft="30px" paddingBottom="10px"> Abacavir Sulphate</Text>
-                <Divider color="gray.500" />
-                <Box paddingTop="35px"> <Image src='/Cardd.png' alt='Chakra UI' /> </Box>
-
-                <Box paddingLeft="20px" paddingTop="10px" fontSize="20px">
-                  <HStack>
-                    <Box> <Text >CAT No </Text> </Box>
-                    <Text paddingLeft="26px"> : SZ-A049001</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>CAS No </Text> </Box>
-                    <Text paddingLeft="26px"> : 188062-50-2</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.F. </Text> </Box>
-                    <Text paddingLeft="40px"> : C14H18N6O</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.Wt </Text> </Box>
-                    <Text paddingLeft="30px"> : 286.3 : 1/2(98.1)</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Inv.Status </Text> </Box>
-                    <Text paddingLeft="10px"> : Custom Synthesis</Text>
-                  </HStack>
-                  <Box paddingTop="20px" paddingLeft="70px"> <Button colorScheme='blue'> Explore More </Button> </Box>
-                </Box>
-              </Card>
-            </Box>
-
-            <Box>
-              <Card height="480px" width="320px" borderRadius="15px" boxShadow="lg">
-                <Text fontSize="30px" paddingLeft="30px" paddingBottom="10px"> Abacavir Sulphate</Text>
-                <Divider color="gray.500" />
-                <Box paddingTop="35px"> <Image src='/Cardd.png' alt='Chakra UI' /> </Box>
-
-                <Box paddingLeft="20px" paddingTop="10px" fontSize="20px">
-                  <HStack>
-                    <Box> <Text >CAT No </Text> </Box>
-                    <Text paddingLeft="26px"> : SZ-A049001</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>CAS No </Text> </Box>
-                    <Text paddingLeft="26px"> : 188062-50-2</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.F. </Text> </Box>
-                    <Text paddingLeft="40px"> : C14H18N6O</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Mol.Wt </Text> </Box>
-                    <Text paddingLeft="30px"> : 286.3 : 1/2(98.1)</Text>
-                  </HStack>
-                  <HStack>
-                    <Box> <Text>Inv.Status </Text> </Box>
-                    <Text paddingLeft="10px"> : Custom Synthesis</Text>
-                  </HStack>
-                  <Box paddingTop="20px" paddingLeft="70px"> <Button colorScheme='blue'> Explore More </Button> </Box>
-                </Box>
-              </Card>
-            </Box>
-
-          </HStack>
-        </Box>
-      </Center>
-
-
+      {/* Mobile and Tablet Dropdown Menu */}
+      <Collapse in={isOpen} animateOpacity>
+        <VStack
+          display={{ base: isOpen ? "flex" : "none", lg: "none" }}
+          alignItems="center"
+          bg="white"
+          color="#215878"
+          fontSize="15px"
+          fontWeight="600"
+          py={1}
+        >
+          {menuData.map((item) => (
+            <React.Fragment key={item.label}>
+              {item.subItems ? (
+                <Menu>
+                  <MenuButton
+                    // as={Button}
+                    // rightIcon={<ChevronDownIcon/>}
+                    variant="link"
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                    mb={4}
+                    fontSize="15px"
+                    fontWeight="600"
+                  >
+                    {item.label}<ChevronDownIcon/>
+                  </MenuButton>
+                  <MenuList>
+                    {item.subItems.map((subItem) => (
+                      <Link key={subItem.label} to={subItem.url}>
+                        <MenuItem>{subItem.label}</MenuItem>
+                      </Link>
+                    ))}
+                  </MenuList>
+                </Menu>
+              ) : (
+                <Link to={item.url}>
+                  <Text
+                    variant="link"
+                    onClick={onToggle} // Close the menu on item click
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                    mb={1}
+                    color={"#215878"}
+                  >
+                    {item.label}
+                  </Text>
+                </Link>
+              )}
+            </React.Fragment>
+          ))}
+          {/* Search Bar */}
+          <InputGroup w="180px">
+            <Input type="text" placeholder="Search..." />
+            <InputRightElement>
+              <IconButton
+                aria-label="Search"
+                icon={<SearchIcon />}
+                variant="ghost"
+                colorScheme="#215878"
+              />
+            </InputRightElement>
+          </InputGroup>
+        </VStack>
+      </Collapse>
     </Box>
-  )
+  );
 }
 
-export default Mainpageone
+export default Header;
+
+
+
+
+import { Box , Input,InputGroup,InputRightAddon, Center} from '@chakra-ui/react';
+import React from 'react'
+
+import "./../App.css"
+const Header2 = () => {
+    return (
+        <Center>
+        <Box className='HeaderLogo'>
+            <Box className="Headerlogo">
+                <img src="logo.png" alt='logo' />
+            </Box>
+            <Box className='HeaderSearch'>
+                <InputGroup size='md'>
+                    <Input width='250px' />
+                    <InputRightAddon className="inputRightAddon" size="md" children='Search' background="#0157AC" />
+                </InputGroup>
+            </Box>
+        </Box>
+        </Center>
+    )
+}
+
+// export default Header2;
+
+
+
+

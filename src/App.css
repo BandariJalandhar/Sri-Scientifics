@@ -1,26 +1,40 @@
-.Innercard {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  color: #333333;
+}
+
+
+.Innercard{
   height: 50px;
   width: 280px;
-  text-align: left 30%;
+ text-align: left 30% ;
   padding-top: 12px;
   padding-left: 10px;
-  box-shadow: rgba(0, 0, 0, 2);
+  box-shadow: rgba(0, 0, 0, 2)
 }
-.Subcard {
-  width: 280px;
+.Subcard{
+  width: 280px ;
   height: 470px;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 10px ;
   /* box-shadow: 2px 3px 8px rgba(0,0,0,0.5) ; */
 }
 
-.resigns {
+.resigns{
   height: 400px;
   width: 350px;
   margin: 5px;
   line-height: 30px;
-  text-align: justify;
+  text-align: justify;    
 }
+td{
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+table{
+  border-radius: 10px;
+}
+
 
 /* @media screen and (max-width: 468px) {
   .about{ 
@@ -33,3 +47,299 @@
 
   
 } */
+
+/* In a CSS file or using styled-components */
+.video-banner {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.video-banner video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* header ============= */
+.HeaderIcons{
+  width: 100%;
+  height: 40px;
+  background: #D9D9D9;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* border:1px solid red; */
+}
+.HeaderIcons1{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+ 
+  width: 200px;
+  margin-right: 50px;
+}
+@media (max-width: 1024px){
+  .HeaderIcons1{
+    margin-right: 0px;
+  }
+}
+@media (max-width: 820px){
+  .HeaderIcons1{
+    margin-right: 0px;
+  }
+  .socialIcon{
+    margin-left: 5px;
+  }
+}
+.socialIcon{
+  margin-left: 20px;
+}
+
+.HeaderLogo{
+  width: 1226px;
+  height: 70px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+
+}
+.inputRightAddon{
+  background: #0157AC;
+  color: white;
+
+}
+/* Header2 */
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Header3 */
+.navbar.sticky {
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.mainAboutUs{
+  margin-left: 120px;
+  margin-right: 120px;
+}
+
+@media (max-width: 820px){
+  
+.mainAboutUs{
+  margin-left: 40px;
+  margin-right: 40px;
+}
+  
+  }
+
+
+  .requestQuote{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .requestForm{
+    background: white;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 30px;
+    border-radius: 0px 10px 10px 0px;
+  }
+  
+  @media (max-width: 1024px){
+    .requestForm{
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-bottom: 30px;
+    }
+   
+  }
+  
+  .formImage{
+    border-radius: 10px 0px 0px 10px;
+  }
+  
+  @media (max-width: 1023px){
+    
+  .formImage{
+    border-radius: 10px 10px 0px 0px;
+  }
+  .requestForm{
+    border-radius: 0px 0px 10px 10px;
+  }
+  }
+
+  .footer{
+    background: #0157AC;
+  color: white;
+  width: 100%;
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 2;
+  }
+    
+    .footerBox{
+      margin-left: 30px;
+      margin-right: 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  
+  @media (max-width: 1024px){
+    .footerBox{
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+  }
+  @media (max-width: 540px){
+    .footerBox1{
+     margin-top: 0px;
+    }
+    .footerBox{
+      margin-top: 10px;
+      margin-bottom:0px;
+     }
+
+  }
+  .devider{
+    border-bottom: 1px solid white;
+  }
+  .copyRight{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .copyRight1{
+    display: flex;
+  }
+
+  /* about us==================== */
+  .aboutHead{
+    color:#0157AC;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  .about{
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  .aboutContent{
+    color: #333333;
+    margin: 45px;
+  }
+  .aboutImage{
+    margin: 40px;
+  }
+  
+  @media (max-width: 1024px){
+    .aboutImage{
+      margin: 40px;
+      margin-top: 0px;
+    }
+    .aboutContent{
+      margin-top: 20px;
+    }
+  }
+  
+  @media (max-width: 540px){
+    .about{
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+    .aboutImage{
+      margin: 0px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 0px;
+    }
+    .aboutContent{
+      margin:15px;
+    }
+  }
+  .aboutChemicals{
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  @media (max-width: 540px){
+    .aboutChemicals{
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+  }
+
+
+.TechSupport{
+  margin-left: 60px;
+  margin-right: 60px;
+}
+  .techForm{
+    border: 1px solid #D9D9D9;
+    box-shadow: -1px 1px 4px #333333;
+    border-radius: 10px;
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 30px;
+  }
+
+  @media (max-width: 540px){
+    .TechSupport{
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  /* contact us======== */
+
+  .contactUs{
+    width: 65%;
+    
+  }
+  .contactFormInput{
+    margin: 6px;
+  }
+  @media (max-width: 912px){
+    .contactBranch{
+      display: flex;
+      justify-content: center;
+
+    }
+    .Branch{
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+  @media (max-width: 540px){
+    .contactBranch{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  /* tables=========== */
+
+  .tableHead{
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+  }
+  .tableBodyApi Tr Td{
+    text-align: center;
+    line-height: 1.5;
+  }

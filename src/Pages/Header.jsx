@@ -1,63 +1,197 @@
-// import React, { useEffect, useState } from 'react';
-import { Box, Button, Flex, HStack, Stack, Text, Image } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { SearchBar } from './Searchbar';
-// import styled from '@emotion/styled';
-import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import React from 'react'
 
-const Header = () => {
+import { useState } from "react";
+import {
+  Box,
+  Flex,
+  IconButton,
+  useDisclosure,
+  VStack,
+  Collapse,
+  Button,
+  Text,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon, SearchIcon, ChevronDownIcon} from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
+
+function Header() {
+  const { isOpen, onToggle } = useDisclosure();
+  const [menuData, setMenuData] = useState([
+    { label: "Home", url: "/" },
+    { label: "About Us", url: "/about" },
+    {
+      label: "Products Category",
+      url: "/Products",
+      subItems: [
+        // product items...
+        { label: "Impurities Synthesis", url: "/Products" },
+        { label: "Laboratory Chemicals & solvents", url: "/Labaratoriesandchemicalsolvents" },
+        { label: "Microbiology Agar Media", url: "/MicrobiologyAgarmedia" },
+        { label: "Resins & Metal scavengers", url: "/Resignsandmetalscavangers" },
+        { label: "HPLC Columns", url: "/HPCLColumns" },
+        { label: "Supply of ApIs & Intermediates", url: "/Apiintermediates" },
+      ],
+    },
+    { label: "Technical Support", url: "/Technicalsupport" },
+    
+    { label: "Contact Us", url: "/contact" },
+  ]);
+
   return (
+    <Box>
+      <Flex
+        as="nav"
+        align="center"
+        justify="space-between"
+        padding={{ base: 2, lg: 4 }}
+        bg="white"
+        color="#215878"
+        h="70px"
+        // position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        fontSize="15px"
+        fontWeight="600"
+        // zIndex="1"
+      >
+        {/* Logo ------- */}
+        <Flex align="center">
+          <img src="Final logo 1.png" alt="Logo" />
+        </Flex>
 
-    <Box px={4} height="60px" pt="10px">
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <HStack alignItems={'center'} >
-          <Link to="/"><Text> <Image src="/logo.png"></Image> </Text></Link>
-          <Box pl="130px">
-            <HStack spacing="8" color="#565454" paddingBottom="10px" className='Poppins'>
-              <Link to="/"><Text _hover={{ color: "#215878", borderRadius: "10px" }}>Home</Text></Link>
-              <Box _hover={{ color: "#215878", borderRadius: "5px" }} w="150px">
+        {/* Hamburger Icon for mobile --------- */}
+        <IconButton
+          display={{ base: "flex", lg: "none" }}
+          icon={isOpen ? <CloseIcon color={"#215878"}/> : <HamburgerIcon color={"#215878"} />}
+          onClick={onToggle}
+          variant="outline"
+          color="white"
+        />
+
+         {/* Search Bar */}
+         <InputGroup w="300px" display={{ base: "none", lg: "flex" }}>
+            <Input type="text" placeholder="Search..." />
+            <InputRightElement>
+              <IconButton
+                aria-label="Search"
+                icon={<SearchIcon />}
+                variant="ghost"
+                colorScheme="#215878"
+              />
+            </InputRightElement>
+          </InputGroup>
+        {/* Desktop Navigation Links */}
+        <Flex display={{ base: "none", lg: "flex" }} alignItems="center">
+
+          {menuData.map((item) => (
+            <React.Fragment key={item.label}>
+              {item.subItems ? (
                 <Menu>
-                  <MenuButton as={Link} rightIcon={<ChevronDownIcon />}>
-                    Products Category
+                  <MenuButton
+                  mr={8}
+                    // as={Button}
+                    // rightIcon={<ChevronDownIcon/>}
+                    variant="link"
+                    fontWeight={"600"}
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                  >
+                    {item.label}<ChevronDownIcon/>
                   </MenuButton>
-                  <MenuList>
-                    <Link to='/Products'><MenuItem>Impurities Synthesis</MenuItem></Link>
-                    <Link to='/Labaratoriesandchemicalsolvents' >
-                      <MenuItem>Laboratory Chemicals & solvents</MenuItem>
-                    </Link>
-                    <Link to='/MicrobiologyAgarmedia' > <MenuItem>Microbiology Agar Media</MenuItem></Link>
-                    <Link to="/Resignsandmetalscavangers ">
-                      {' '}
-                      <MenuItem>Resigns & Metal scavengers</MenuItem>
-                    </Link>
-                    <Link to="/HPCLColumns">
-                      {' '}
-                      <MenuItem>HPLC Columns</MenuItem>
-                    </Link>
-                    <Link to='/Apiintermediates'>
-                      <MenuItem>Supply of ApIs & Intermediates</MenuItem>
-                    </Link>
+                  <MenuList >
+                    {item.subItems.map((subItem) => (
+                      <Link key={subItem.label} to={subItem.url}>
+                        <MenuItem>{subItem.label}</MenuItem>
+                      </Link>
+                    ))}
                   </MenuList>
                 </Menu>
-
-              </Box>
-              <Link to="/Technicalsupport"><Text _hover={{ color: "#215878", borderRadius: "10px" }}>Technical Support</Text></Link>
-              <Link to="/About"><Text _hover={{ color: "#215878", borderRadius: "10px" }}>About</Text></Link>
-              <Link to="/Contact"><Text _hover={{ color: "#215878", borderRadius: "10px" }}>Contact</Text></Link>
-              {/* <Button variant='outline' _hover={{ color: "#215878", }} borderRadius="15px"> <Link to="/Requestaquote"><Text as="b">Request a Quote</Text></Link> </Button> */}
-              <SearchBar />
-            </HStack>
-          </Box>
-        </HStack>
+              ) : (
+                <Link to={item.url}>
+                  <Text _hover={{ color: "#215878", borderRadius: "10px" }} mr={8} >
+                    {item.label}
+                  </Text>
+                </Link>
+              )}
+            </React.Fragment>
+          ))}
+          
+        </Flex>
       </Flex>
-      <Box pb={4} display={{ md: 'none' }}>
-        <Stack as={'nav'} spacing={4}>
-        </Stack>
-      </Box>
-    </Box>
 
-  )
+      {/* Mobile and Tablet Dropdown Menu */}
+      <Collapse in={isOpen} animateOpacity>
+        <VStack
+          display={{ base: isOpen ? "flex" : "none", lg: "none" }}
+          alignItems="center"
+          bg="white"
+          color="#215878"
+          fontSize="15px"
+          fontWeight="600"
+          py={1}
+        >
+          {menuData.map((item) => (
+            <React.Fragment key={item.label}>
+              {item.subItems ? (
+                <Menu>
+                  <MenuButton
+                    // as={Button}
+                    // rightIcon={<ChevronDownIcon/>}
+                    variant="link"
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                    mb={4}
+                    fontSize="15px"
+                    fontWeight="600"
+                  >
+                    {item.label}<ChevronDownIcon/>
+                  </MenuButton>
+                  <MenuList>
+                    {item.subItems.map((subItem) => (
+                      <Link key={subItem.label} to={subItem.url}>
+                        <MenuItem>{subItem.label}</MenuItem>
+                      </Link>
+                    ))}
+                  </MenuList>
+                </Menu>
+              ) : (
+                <Link to={item.url}>
+                  <Text
+                    variant="link"
+                    onClick={onToggle} 
+                    _hover={{ color: "#215878", borderRadius: "10px" }}
+                    mb={1}
+                    color={"#215878"}
+                  >
+                    {item.label}
+                  </Text>
+                </Link>
+              )}
+            </React.Fragment>
+          ))}
+          {/* Search Bar */}
+          <InputGroup w="180px">
+            <Input type="text" placeholder="Search..." />
+            <InputRightElement>
+              <IconButton
+                aria-label="Search"
+                icon={<SearchIcon />}
+                variant="ghost"
+                colorScheme="#215878"
+              />
+            </InputRightElement>
+          </InputGroup>
+        </VStack>
+      </Collapse>
+    </Box>
+  );
 }
 
-export default Header
+export default Header;
+

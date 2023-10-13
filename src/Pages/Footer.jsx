@@ -1,100 +1,86 @@
-import { Box, Divider, Icon } from '@chakra-ui/react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
-import { HStack, VStack, Link, Text, Center } from "@chakra-ui/react"
-
-
-
+import { Box } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { MdCopyright } from 'react-icons/md';
+import { VStack,  Text, Center, Flex, SimpleGrid } from '@chakra-ui/react';
+import './../App.css';
 const Footer = () => {
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    fetchDetails();
+  }, []);
+
+  const fetchDetails = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/contact');
+      setContacts(response.data.contacts);
+    } catch (error) {
+      console.error('Error fetching buttons:', error);
+    }
+  };
   return (
-     
-    <Box bgColor={'#F5F5F5'} h={'300px'} >
-      <Box>
-        <HStack m="30px" justifyContent={'space-between'}>
-          <Box m="30px">
-            <VStack m="2px" alignItems="flex-start" color="#756F6F">
-              <Link>Home</Link>
-              <Link>About Us</Link>
-              <Link>Product Category</Link>
-              <Link>Techinical support</Link>
-              <Link>Request a Quote</Link>
-              <Link>Contact Us</Link>
+    <Box className="footer">
+      <Center>
+        <Flex direction={{ base: 'column', md: 'row' }}>
+          <Box className="footerBox" w="230px" mt="40px">
+            <VStack alignItems="flex-start">
+              <a href='/'>Home</a>
+              <a href='/about'>About Us</a>
+              <a href='/categories'>Product Category</a>
+              <a href='/Technicalsupport'>Techinical support</a>
+              <a href='/contact'>Contact Us</a>
             </VStack>
           </Box>
-
-          <Box m="30px" color="#756F6F">
-            <VStack m="2px" alignItems="flex-start" fontSize="16px" color="#756F6F">
-              <Link href="/" isExternal>
-                <Text fontSize="20px" color="#215878" as="b">Hyderabad</Text>
-              </Link>
-              <VStack spacing={2} alignItems="flex-start">
-                <Text>
-                  Address : Pragathi Nagar,Hyderabad
-                </Text>
-                <Text>
-                  Mobile: 9182689527
-                </Text>
-                <Text>
-                  Mail : srinivas@sriscientifics.co.in
-                </Text>
-                <Text>
-                  Enquiry : info@sriscientifics.co.in
-                </Text>
-              </VStack>
-            </VStack>
-          </Box>
-
-
-          <Box m="30px" color="#756F6F">
-            <VStack m="2px" alignItems="flex-start" color="#756F6F" fontSize="16px">
-              <Link href="/" isExternal>
-                <Text fontSize="20px" color="#215878" as="b">Visakhapatnam</Text>
-              </Link>
-              <VStack spacing={1} alignItems="flex-start">
-                <Text >
-                  Address: Lankelapalem, Visakhapatnam, <br /> Ap-531019
-                </Text>
-                <Text >
-                  Mobile: 9182689527
-                </Text>
-                <Text>
-                  Mail : srinivas@sriscientifics.co.in
-                </Text>
-                <Text>
-                  Enquiry : enquiry@sriscientifics.co.in
-                </Text>
-              </VStack>
-            </VStack>
-          </Box>
-
-          <Box>
-            <VStack as="b" alignItems="flex-start" color="#215878">
-              <Box margin="50px" pt="100px">
-                <Text> Follow us on </Text>
-                <HStack>
-                  <Icon as={FaTwitter} boxSize={6} color="#215878" />
-                  <Icon as={FaFacebook} boxSize={6} color="#215878" />
-                  <Icon as={FaInstagram} boxSize={6} color="#215878" />
-                </HStack>
+          <SimpleGrid columns={{base:"1",lg:"2"}} >
+            {contacts.map(detail => (
+              <Box key={detail._id} className="footerBox footerBox1" w="300px">
+                <Text fontSize="30px">{detail.city_name}</Text>
+                <Flex>
+                  <Text>Address&nbsp;</Text>
+                  <Text>:</Text>
+                  <Text>&nbsp;&nbsp;</Text>
+                  <Box>
+                    {detail.street_name}, {detail.city_name}, {detail.state_name}, {detail.postal_code}
+                  </Box>
+                </Flex>
+                <Flex>
+                  <Text>Mobile</Text>
+                  <Text>&nbsp;&nbsp;&nbsp;:</Text>
+                  <Box>&nbsp; {detail.mobile}</Box>
+                </Flex>
+                <Flex>
+                  <Text>Mail</Text>
+                  <Text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</Text>
+                  <Box>
+                  &nbsp;&nbsp;
+                    {detail.admin_email}
+                  </Box>
+                </Flex>
+                <Flex>
+                  <Text>Enquiry</Text>
+                  <Text>&nbsp;&nbsp;: </Text>
+                  <Box>&nbsp;&nbsp;{detail.enquiry_email}</Box>
+                </Flex>
               </Box>
-            </VStack>
+            ))}
+          </SimpleGrid>
+        </Flex>
+      </Center>
+      <Box className="devider"></Box>
+      <Center>
+        <Box className="copyRight">
+          <Box className="copyRight1">
+            <Text>@ 2023 Sri Scientifics</Text>
+            <Box m="4px" mt="7px">
+              <MdCopyright />
+            </Box>
+
+            <Text>All rights Reserved</Text>
           </Box>
-        </HStack>    
-       
-
-      
-        {/* <Box> 
-          <Divider /> </Box>
-          <Box margin="10px"
-            color="#215878"
-            align="center"> 
-          <Text> @ 2023 Sri Scientifics &copy; All rights Reserved</Text>
-        </Box> */}
-      
-      
+        </Box>
+      </Center>
     </Box>
-    </Box>
-    
-
-  )
-}
+  );
+};
 export default Footer;
