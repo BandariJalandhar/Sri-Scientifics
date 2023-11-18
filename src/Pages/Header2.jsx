@@ -133,7 +133,7 @@ function Header2() {
     return (
 
         <Center>
-            <Box w={{ base: "100%", xl: "93%" }} className={`navbar ${isSticky ? 'sticky' : ''}`}>
+            <Box w={{ base: "100%", xl: "1230px" }} className={`navbar ${isSticky ? 'sticky' : ''}`}>
                 <Flex
                     as="nav"
                     align="center"
@@ -142,8 +142,6 @@ function Header2() {
                     bg="white"
                     color="#0157AC"
                     h="70px"
-
-                    // position="fixed"
                     top="0"
                     left="0"
                     right="0"
